@@ -13,7 +13,6 @@ export default function ChipInput({
   register,
   errors,
   setValue,
-  getValues,
 }) {
   const { editCourse, course } = useSelector((state) => state.course)
 
@@ -26,13 +25,11 @@ export default function ChipInput({
       setChips(course?.tag)
     }
     register(name, { required: true, validate: (value) => value.length > 0 })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [course?.tag, editCourse, name, register])
 
   useEffect(() => {
     setValue(name, chips)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chips])
+  }, [chips, name, setValue])
 
   // Function to handle user input when chips are added
   const handleKeyDown = (event) => {

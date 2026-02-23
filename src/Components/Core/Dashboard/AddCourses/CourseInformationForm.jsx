@@ -55,9 +55,7 @@ export default function CourseInformationForm() {
       setValue("courseImage", course.thumbnail)
     }
     getCategories()
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [course, editCourse, setValue])
 
   const isFormUpdated = () => {
     const currentValues = getValues()
@@ -257,7 +255,6 @@ export default function CourseInformationForm() {
         register={register}
         errors={errors}
         setValue={setValue}
-        getValues={getValues}
       />
       {/* Course Thumbnail Image */}
       <Upload
@@ -292,7 +289,6 @@ export default function CourseInformationForm() {
         register={register}
         setValue={setValue}
         errors={errors}
-        getValues={getValues}
       />
       {/* Next Button */}
       <div className="flex justify-end gap-x-2">

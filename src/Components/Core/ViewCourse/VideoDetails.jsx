@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {updateCompletedLectures} from "../../../Slice/viewCourseSlice"
 import {markLectureAsComplete} from "../../../services/operations/courseDetailsAPI"
 import { BigPlayButton, Player } from "video-react"
@@ -15,7 +15,6 @@ const VideoDetails = () => {
   const playerRef = useRef(null);
   const {token} = useSelector((state)=>state.auth);
   const {courseSectionData, courseEntireData, completedLectures} = useSelector((state)=>state.viewCourse);
-  const location = useLocation();
 
   const [videoData, setVideoData] = useState([]);
   const [videoEnded, setVideoEnded] =  useState(false);
@@ -35,14 +34,19 @@ const VideoDetails = () => {
         const filteredVideoData =filteredData?.[0]?.subSection.filter(
           (data) => data._id === subSectionId
         )
-        console.log("filteredVideoData", filteredVideoData)
         setVideoData(filteredVideoData[0])
-        console.log("Video Data",videoData)
         setPreviewSource(courseEntireData.thumbnail)
         setVideoEnded(false)
       }
     })()
-  }, [courseSectionData, courseEntireData, location.pathname])
+  }, [
+    courseEntireData,
+    courseId,
+    courseSectionData,
+    navigate,
+    sectionId,
+    subSectionId,
+  ])
 
 
   const isFirstVideo = ()=>{

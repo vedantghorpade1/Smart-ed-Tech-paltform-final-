@@ -37,13 +37,13 @@ export default function SubSectionModal({
   const { course } = useSelector((state) => state.course)
 
   useEffect(() => {
-    if (view || edit) {
+    if ((view || edit) && modalData) {
       // console.log("modalData", modalData)
       setValue("lectureTitle", modalData.title)
       setValue("lectureDesc", modalData.description)
       setValue("lectureVideo", modalData.videoUrl)
     }
-  }, [])
+  }, [edit, modalData, setValue, view])
 
   // detect whether form is updated or not
   const isFormUpdated = () => {
@@ -201,5 +201,4 @@ export default function SubSectionModal({
     </div>
   )
 }
-
 

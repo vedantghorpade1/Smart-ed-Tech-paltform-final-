@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { BsChevronDown } from "react-icons/bs"
 import { IoIosArrowBack } from "react-icons/io"
 import { useSelector } from "react-redux"
-import { useLocation, useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 import Iconbtn from "../../Common/Iconbtn"
 
@@ -12,7 +12,6 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
     const [activeStatus, setActiveStatus] = useState("");
     const [videoBarActive, setVideoBarActive] = useState("");
     const navigate = useNavigate();
-    const location = useLocation();
     const {sectionId,subSectionId} = useParams();
 
     const {
@@ -40,7 +39,7 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
             setVideoBarActive(activeSubSectionId);
         }
         setActiveFlags();
-    },[courseSectionData,courseEntireData,location.pathname])
+    },[courseSectionData, sectionId, subSectionId])
 
     return (
         <>

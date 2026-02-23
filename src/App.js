@@ -19,9 +19,8 @@ import Settings from "./Components/Core/Dashboard/Settings/index";
 import EnrolledCourses from "./Components/Core/Dashboard/EnrolledCourses";
 import Cart from "./Components/Core/Dashboard/Cart";
 import { ACCOUNT_TYPE } from "./utils/constants";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import EditCourse from "./Components/Core/Dashboard/EditCourse/index"
-import { useNavigate } from "react-router-dom";
 import AddCourse from "./Components/Core/Dashboard/AddCourses/index";
 import Catalog from "./pages/Catalog"
 import MyCourses from "./Components/Core/Dashboard/MyCourses"
@@ -32,9 +31,6 @@ import Instructor from "./Components/Core/InstructorDashboard/Instructor";
 import {Helmet} from "react-helmet";
 
 function App() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  
   const { user } = useSelector((state) => state.profile)
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">

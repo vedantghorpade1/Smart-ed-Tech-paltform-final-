@@ -1,11 +1,8 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 
-import {
-  fetchCourseDetails,
-  getFullDetailsOfCourse,
-} from "../../../../services/operations/courseDetailsAPI"
+import { getFullDetailsOfCourse } from "../../../../services/operations/courseDetailsAPI"
 import { setCourse, setEditCourse } from "../../../../Slice/courseSlice"
 import RenderSteps from "../AddCourses/RenderSteps"
 
@@ -19,7 +16,7 @@ export default function EditCourse() {
   const { token } = useSelector((state) => state.auth)
 
 
-  const populateCourseDetails = async()=>{
+  const populateCourseDetails = useCallback(async () => {
     setLoading(true)
     const result = await getFullDetailsOfCourse(courseId, token)
     if (result?.courseDetails) {
@@ -27,12 +24,11 @@ export default function EditCourse() {
       dispatch(setCourse(result?.courseDetails))
     }
     setLoading(false)
-  }
+  }, [courseId, dispatch, token])
 
   useEffect(() => {
-    populateCourseDetails();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    populateCourseDetails()
+  }, [populateCourseDetails])
 
   if (loading) {
     return (
@@ -59,4 +55,3 @@ export default function EditCourse() {
     </div>
   )
 }
-

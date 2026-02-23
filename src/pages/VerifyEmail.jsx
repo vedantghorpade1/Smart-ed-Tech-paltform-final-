@@ -18,8 +18,7 @@ function VerifyEmail() {
     if (!signupData) {
       navigate("/signup");
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [navigate, signupData]);
 
   const handleVerifyAndSignup = (e) => {
     e.preventDefault();
